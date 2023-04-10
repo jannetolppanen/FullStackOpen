@@ -7,15 +7,17 @@ const App = (props) => {
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
+  // useEffectin hook osio
   const hook = () => {
     console.log('effect')
     axios
       .get('http://localhost:3001/notes')
-    .then(response => {
-      console.log('promise fulfilled')
-      setNotes(response.data)
-    })
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
   }
+  
 
   useEffect(hook, [])
 
