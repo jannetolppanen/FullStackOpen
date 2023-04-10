@@ -21,12 +21,11 @@ const App = (props) => {
 
 
   useEffect(() => {
-    Noteservice
-      .getAll()
-      .then(response => {
-        setNotes(response.data)
-      })
-  }, [])
+    noteService
+    .getAll()
+    .then(initialNotes => {
+      setNotes(initialNotes)
+    })
 
   const addNote = (event) => {
     event.preventDefault()
