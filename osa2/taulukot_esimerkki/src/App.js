@@ -20,7 +20,13 @@ const App = (props) => {
   }
 
 
-  useEffect(hook, [])
+  useEffect(() => {
+    Noteservice
+      .getAll()
+      .then(response => {
+        setNotes(response.data)
+      })
+  }, [])
 
   const addNote = (event) => {
     event.preventDefault()
@@ -29,22 +35,23 @@ const App = (props) => {
       important: Math.random() > 0.5,
       id: notes.length + 1,
     }
-    axios.post('http://localhost:3001/notes', noteObject)
-    .then(response => {
-      setNotes(notes.concat(response.data))
-      setNewNote('')
-    })
+    Noteservice
+      .create(noteObject)
+      .then(response => {
+        setNotes(notes.concat(response.data))
+        setNewNote('')
+      })
   }
 
   const toggleImportanceOf = (id) => {
-    const url = `http://localhost:3001/notes/${id}`
+    // const url = `http://localhost:3001/notes/${id}`
     const note = notes.find(n => n.id === id)
-    const changedNote = { ...note, important: !note.important}
+    const changedNote = { ...note, important: !note.important }
 
-    axios
-      .put(url, changedNote)
+    Noteservice
+      .update(id, changedNote)
       .then(response => {
-        setNotes(notes.map(note => note.id !== id ? note : response.data))
+        setNotes(notes.map(note => note.id != id ? note : response.data))
       })
   }
 
@@ -67,10 +74,10 @@ const App = (props) => {
       </div>
       <ul>
         {notesToShow.map(note =>
-          <Note 
-          key={note.id} 
-          note={note} 
-          toggleImportance={() => toggleImportanceOf(note.id)}/>
+          <Note
+            key={note.id}
+            note={note}
+            toggleImportance={() => toggleImportanceOf(note.id)} />
         )}
       </ul>
       <form onSubmit={addNote}>
