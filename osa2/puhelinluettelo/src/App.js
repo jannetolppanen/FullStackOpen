@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import personService from './services/persons'
 
 const Numbers = ({ persons, filter }) => {
   // Filtteröi personsin newFilter mukaan
@@ -62,10 +63,10 @@ const App = () => {
   const [persons, setPersons] = useState([])
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
 
@@ -86,38 +87,38 @@ const App = () => {
       alert(`${personObject.name} is already added to phonebook `)
     }
     else {
-      axios
-        .post('http://localhost:3001/persons', personObject)
-        .then(response => {
-          setPersons(persons.concat(response.data))
+      personService
+        .create(personObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
         })
     }
   }
 
-  // Jokaisella merkillä muuttaa newName arvoksi tekstikentän arvon
-  const handlePersonChange = (event) => {
-    setNewName(event.target.value)
-  }
+// Jokaisella merkillä muuttaa newName arvoksi tekstikentän arvon
+const handlePersonChange = (event) => {
+  setNewName(event.target.value)
+}
 
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value)
-  }
+const handleNumberChange = (event) => {
+  setNewNumber(event.target.value)
+}
 
-  const handleFilterChange = (event) => {
-    setNewFilter(event.target.value)
-  }
+const handleFilterChange = (event) => {
+  setNewFilter(event.target.value)
+}
 
-  return (
-    <div>
-      <h2>Phonebook</h2>
-      <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
-      <h1>add a new</h1>
-      <Add AddPerson={AddPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
-      <Numbers persons={persons} filter={newFilter} />
-    </div>
-  )
+return (
+  <div>
+    <h2>Phonebook</h2>
+    <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
+    <h1>add a new</h1>
+    <Add AddPerson={AddPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
+    <Numbers persons={persons} filter={newFilter} />
+  </div>
+)
 }
 
 export default App

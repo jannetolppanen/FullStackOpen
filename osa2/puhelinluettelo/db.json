@@ -24,6 +24,11 @@
       "name": "Add new person",
       "number": "Add new number",
       "id": 5
+    },
+    {
+      "name": "Does adding person",
+      "number": "from module work?",
+      "id": 6
     }
   ]
 }
