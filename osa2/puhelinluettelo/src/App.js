@@ -69,7 +69,7 @@ const App = () => {
         console.log('promise fulfilled')
         setPersons(response.data)
       })
-  })
+  }, [])
   console.log('render', persons.length, 'persons')
 
   // newName arvo on input kentän arvo
