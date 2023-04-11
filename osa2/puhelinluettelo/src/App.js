@@ -107,11 +107,13 @@ const App = () => {
   }
   // Lähetetään deletepyyntö id:n kanssa ja päivitetään persons listalla joka ei sisällä kyseistä id:tä
   const removePerson = (id) => {
+    let confirm = window.confirm('Are you sure you want to delete this item?')
+    if(confirm){
     axios
       .delete(`http://localhost:3001/persons/${id}`)
       .then(response => {
         setPersons(persons.filter(person => person.id !== id))
-      })
+      })}
     }
 
   // Jokaisella merkillä muuttaa newName arvoksi tekstikentän arvon

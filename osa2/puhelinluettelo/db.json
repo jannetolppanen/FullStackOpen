@@ -1,16 +1,6 @@
 {
   "persons": [
     {
-      "name": "John Doe",
-      "number": "555-1234",
-      "id": 1
-    },
-    {
-      "name": "Jane Smith",
-      "number": "555-5678",
-      "id": 2
-    },
-    {
       "name": "Bob Johnson",
       "number": "555-9876",
       "id": 3
