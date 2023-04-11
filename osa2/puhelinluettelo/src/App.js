@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Numbers = ({ persons, filter }) => {
@@ -34,7 +34,7 @@ const Filter = ({ newFilter, handleFilterChange }) => {
   )
 }
 
-const Add = ( {AddPerson, newName, handlePersonChange, newNumber, handleNumberChange } ) => {
+const Add = ({ AddPerson, newName, handlePersonChange, newNumber, handleNumberChange }) => {
   return (
     <>
       <form onSubmit={AddPerson}>
@@ -62,15 +62,12 @@ const App = () => {
   const [persons, setPersons] = useState([])
 
   useEffect(() => {
-    console.log('effect')
     axios
       .get('http://localhost:3001/persons')
       .then(response => {
-        console.log('promise fulfilled')
         setPersons(response.data)
       })
   }, [])
-  console.log('render', persons.length, 'persons')
 
   // newName arvo on input kentän arvo
   const [newName, setNewName] = useState('Add new person')
@@ -84,13 +81,18 @@ const App = () => {
       name: newName,
       number: newNumber
     }
+    // Tarkastetaan onko puhelinluettelossa jo saman niminen
     if (persons.some(person => person.name.toLocaleLowerCase() === personObject.name.toLocaleLowerCase())) {
       alert(`${personObject.name} is already added to phonebook `)
     }
     else {
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewNumber('')
+        })
     }
   }
 
