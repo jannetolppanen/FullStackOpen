@@ -1,34 +1,54 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
+      "name": "John Doe",
+      "number": "555-1234",
       "id": 1
     },
     {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
+      "name": "Jane Smith",
+      "number": "555-5678",
       "id": 2
     },
     {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
+      "name": "Bob Johnson",
+      "number": "555-9876",
       "id": 3
     },
     {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
+      "name": "Sarah Brown",
+      "number": "555-5432",
       "id": 4
     },
     {
-      "name": "Add new person",
-      "number": "Add new number",
+      "name": "Tom Davis",
+      "number": "555-6789",
       "id": 5
     },
     {
-      "name": "Does adding person",
-      "number": "from module work?",
+      "name": "Karen Lee",
+      "number": "555-3456",
       "id": 6
+    },
+    {
+      "name": "David Wang",
+      "number": "555-8765",
+      "id": 7
+    },
+    {
+      "name": "Emily Park",
+      "number": "555-2345",
+      "id": 8
+    },
+    {
+      "name": "Alex Kim",
+      "number": "555-7890",
+      "id": 9
+    },
+    {
+      "name": "Maggie Chen",
+      "number": "555-4321",
+      "id": 10
     }
   ]
 }

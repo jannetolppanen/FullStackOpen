@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import personService from './services/persons'
 
-const Numbers = ({ persons, filter }) => {
+const Numbers = ({ persons, filter, removePerson }) => {
   // Filtteröi personsin newFilter mukaan
   let filteredPersons = persons.filter((person) =>
     person.name.toLowerCase().includes(filter.toLowerCase()))
@@ -13,7 +13,7 @@ const Numbers = ({ persons, filter }) => {
       <ul>
         {filteredPersons.map(person =>
           <li key={person.name}>
-            {person.name} {person.number}
+            {person.name} {person.number} <RemoveButton id={person.id} removePerson={removePerson} />
           </li>
         )}
       </ul>
@@ -58,10 +58,19 @@ const Add = ({ AddPerson, newName, handlePersonChange, newNumber, handleNumberCh
   )
 }
 
+const RemoveButton = ({ id, removePerson }) => {
+  return (
+    <>
+      <button onClick={() => removePerson(id)}>remove {id} </button>
+    </>
+  )
+}
+
 const App = () => {
   // Tallennetaan tänne persons json
   const [persons, setPersons] = useState([])
 
+  // Haetaan nimilista ensimmmäisen kerran
   useEffect(() => {
     personService
       .getAll()
@@ -96,29 +105,37 @@ const App = () => {
         })
     }
   }
+  // Lähetetään deletepyyntö id:n kanssa ja päivitetään persons listalla joka ei sisällä kyseistä id:tä
+  const removePerson = (id) => {
+    axios
+      .delete(`http://localhost:3001/persons/${id}`)
+      .then(response => {
+        setPersons(persons.filter(person => person.id !== id))
+      })
+    }
 
-// Jokaisella merkillä muuttaa newName arvoksi tekstikentän arvon
-const handlePersonChange = (event) => {
-  setNewName(event.target.value)
-}
+  // Jokaisella merkillä muuttaa newName arvoksi tekstikentän arvon
+  const handlePersonChange = (event) => {
+    setNewName(event.target.value)
+  }
 
-const handleNumberChange = (event) => {
-  setNewNumber(event.target.value)
-}
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
 
-const handleFilterChange = (event) => {
-  setNewFilter(event.target.value)
-}
+  const handleFilterChange = (event) => {
+    setNewFilter(event.target.value)
+  }
 
-return (
-  <div>
-    <h2>Phonebook</h2>
-    <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
-    <h1>add a new</h1>
-    <Add AddPerson={AddPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
-    <Numbers persons={persons} filter={newFilter} />
-  </div>
-)
+  return (
+    <div>
+      <h2>Phonebook</h2>
+      <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
+      <h1>add a new</h1>
+      <Add AddPerson={AddPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
+      <Numbers persons={persons} filter={newFilter} removePerson={removePerson} />
+    </div>
+  )
 }
 
 export default App
