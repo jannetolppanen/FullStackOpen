@@ -17,15 +17,14 @@ const App = (props) => {
         console.log('promise fulfilled')
         setNotes(response.data)
       })
-  }
+  }}
 
 
-  useEffect(() => {
-    noteService
-    .getAll()
-    .then(initialNotes => {
-      setNotes(initialNotes)
-    })
+  noteService
+  .getAll()
+  .then(initialNotes => {
+    setNotes(initialNotes)
+  })
 
   const addNote = (event) => {
     event.preventDefault()
