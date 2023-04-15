@@ -1,13 +1,8 @@
 {
   "persons": [
     {
-      "name": "Bob Johnson",
-      "number": "555-9876",
-      "id": 3
-    },
-    {
       "name": "Sarah Brown",
-      "number": "555-5432",
+      "number": "666",
       "id": 4
     },
     {
@@ -39,6 +34,21 @@
       "name": "Maggie Chen",
       "number": "555-4321",
       "id": 10
+    },
+    {
+      "name": "Add new person",
+      "number": "Add new number",
+      "id": 11
+    },
+    {
+      "name": "jeppe",
+      "number": "33",
+      "id": 12
+    },
+    {
+      "name": "Jonas",
+      "number": "Brothers",
+      "id": 13
     }
   ]
 }

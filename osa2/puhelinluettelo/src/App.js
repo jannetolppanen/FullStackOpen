@@ -92,9 +92,23 @@ const App = () => {
       number: newNumber
     }
     // Tarkastetaan onko puhelinluettelossa jo saman niminen
+    // Jos on, kysytään halutaanko muuttaa numeroa
     if (persons.some(person => person.name.toLocaleLowerCase() === personObject.name.toLocaleLowerCase())) {
-      alert(`${personObject.name} is already added to phonebook `)
-    }
+      if (window.confirm(`Do you want to update the number?`)) {
+        const personNameToUpdate = personObject.name
+        const personToUpdate = persons.find(person => person.name === personNameToUpdate)
+        const personToUpdateId = personToUpdate.id
+        
+        const updatedPerson = {...personToUpdate, number: personObject.number}
+        
+        axios.put(`http://localhost:3001/persons/${personToUpdateId}`, updatedPerson)
+        .then(response => {
+          setPersons(persons.map(person => person.id !== personToUpdateId ? person : response.data))
+        })
+      } else {
+        console.log('User did not want to update the number')
+      }
+      }
     else {
       personService
         .create(personObject)
@@ -108,13 +122,14 @@ const App = () => {
   // Lähetetään deletepyyntö id:n kanssa ja päivitetään persons listalla joka ei sisällä kyseistä id:tä
   const removePerson = (id) => {
     let confirm = window.confirm('Are you sure you want to delete this item?')
-    if(confirm){
-    axios
-      .delete(`http://localhost:3001/persons/${id}`)
-      .then(response => {
-        setPersons(persons.filter(person => person.id !== id))
-      })}
+    if (confirm) {
+      axios
+        .delete(`http://localhost:3001/persons/${id}`)
+        .then(response => {
+          setPersons(persons.filter(person => person.id !== id))
+        })
     }
+  }
 
   // Jokaisella merkillä muuttaa newName arvoksi tekstikentän arvon
   const handlePersonChange = (event) => {
