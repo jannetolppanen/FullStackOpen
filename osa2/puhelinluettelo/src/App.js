@@ -96,7 +96,7 @@ const App = () => {
     if (persons.some(person => person.name.toLocaleLowerCase() === personObject.name.toLocaleLowerCase())) {
       if (window.confirm(`Do you want to update the number?`)) {
         const personNameToUpdate = personObject.name
-        const personToUpdate = persons.find(person => person.name === personNameToUpdate)
+        const personToUpdate = persons.find(person => person.name.toLocaleLowerCase() === personNameToUpdate.toLocaleLowerCase())
         const personToUpdateId = personToUpdate.id
         
         const updatedPerson = {...personToUpdate, number: personObject.number}
