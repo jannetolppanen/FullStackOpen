@@ -7,7 +7,7 @@
     },
     {
       "name": "Tom Davis",
-      "number": "555-6789",
+      "number": "12345",
       "id": 5
     },
     {
@@ -34,21 +34,6 @@
       "name": "Maggie Chen",
       "number": "555-4321",
       "id": 10
-    },
-    {
-      "name": "Add new person",
-      "number": "Add new number",
-      "id": 11
-    },
-    {
-      "name": "jeppe",
-      "number": "33",
-      "id": 12
-    },
-    {
-      "name": "Jonas",
-      "number": "Brothers",
-      "id": 13
     }
   ]
 }
