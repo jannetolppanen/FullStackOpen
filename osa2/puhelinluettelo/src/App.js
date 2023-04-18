@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import personService from './services/persons'
-import DeleteMessage from './components/DeleteMessage'
+import ActionMessage from './components/ActionMessage'
 
 const Numbers = ({ persons, filter, removePerson }) => {
   // Filtteröi personsin newFilter mukaan
@@ -70,7 +70,8 @@ const RemoveButton = ({ id, removePerson }) => {
 const App = () => {
   // Tallennetaan tänne persons json
   const [persons, setPersons] = useState([])
-  const [deleteMessage, setDeleteMessage] = useState(null)
+  const [ActionMessageText, setActionMessageText] = useState(null)
+  const [messageCssType, setMessageCssType] = useState(null)
 
   // Haetaan nimilista ensimmmäisen kerran
   useEffect(() => {
@@ -136,11 +137,12 @@ const App = () => {
         .delete(`http://localhost:3001/persons/${id}`)
         .then(response => {
           setPersons(persons.filter(person => person.id !== id))
-          setDeleteMessage(
+          setMessageCssType('deletion')
+          setActionMessageText(
             `Deleted ${removedPersonsName}`
           )
           setTimeout(() => {
-            setDeleteMessage(null)
+            setActionMessageText(null)
           }, 2500)
         })
     }
@@ -161,7 +163,7 @@ const App = () => {
 
   return (
     <div>
-      <DeleteMessage message={deleteMessage} />
+      <ActionMessage message={ActionMessageText} type={messageCssType} />
       <h2>Phonebook</h2>
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
       <h1>add a new</h1>

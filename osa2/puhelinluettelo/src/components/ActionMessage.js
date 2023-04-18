@@ -1,12 +1,12 @@
-const DeleteMessage = ({ message }) => {
+const ActionMessage = ({ message, type}) => {
     if (message === null) {
         return null
     }
     return (
-        <div className="deletion">
+        <div className={type}>
             {message}
         </div>
     )
 }
 
-export default DeleteMessage
+export default ActionMessage
