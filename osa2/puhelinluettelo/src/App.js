@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import personService from './services/persons'
+import DeleteMessage from './components/DeleteMessage'
 
 const Numbers = ({ persons, filter, removePerson }) => {
   // Filtteröi personsin newFilter mukaan
@@ -69,6 +70,7 @@ const RemoveButton = ({ id, removePerson }) => {
 const App = () => {
   // Tallennetaan tänne persons json
   const [persons, setPersons] = useState([])
+  const [deleteMessage, setDeleteMessage] = useState(null)
 
   // Haetaan nimilista ensimmmäisen kerran
   useEffect(() => {
@@ -83,6 +85,12 @@ const App = () => {
   const [newName, setNewName] = useState('Add new person')
   const [newNumber, setNewNumber] = useState('Add new number')
   const [newFilter, setNewFilter] = useState('')
+
+  // Haetaan id perusteella personsista nimeä. Jos nimi löytyy palautetaan nimi, jos ei löydy palautetaan tyhjä stringi
+  const getNameById = (id) => {
+    const person = persons.find((person) => person.id === id)
+    return person ? person.name : ""
+  }
 
   //Luo uuden objektin joka lisätään personsiin
   const AddPerson = (event) => {
@@ -121,12 +129,19 @@ const App = () => {
   }
   // Lähetetään deletepyyntö id:n kanssa ja päivitetään persons listalla joka ei sisällä kyseistä id:tä
   const removePerson = (id) => {
+    const removedPersonsName = getNameById(id)
     let confirm = window.confirm('Are you sure you want to delete this item?')
     if (confirm) {
       axios
         .delete(`http://localhost:3001/persons/${id}`)
         .then(response => {
           setPersons(persons.filter(person => person.id !== id))
+          setDeleteMessage(
+            `Deleted ${removedPersonsName}`
+          )
+          setTimeout(() => {
+            setDeleteMessage(null)
+          }, 2500)
         })
     }
   }
@@ -146,6 +161,7 @@ const App = () => {
 
   return (
     <div>
+      <DeleteMessage message={deleteMessage} />
       <h2>Phonebook</h2>
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
       <h1>add a new</h1>
