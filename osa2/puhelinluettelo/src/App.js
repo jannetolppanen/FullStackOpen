@@ -106,7 +106,7 @@ const App = () => {
         text: "", 
         css: ""
       })
-    }, 2500)
+    }, 5000)
   }
 
   //Luo uuden objektin joka lisätään personsiin
@@ -132,6 +132,11 @@ const App = () => {
           setNewName("")
           setNewNumber("")
           createNotificationMessage("changed the number of", "purple", updatedPerson.name)
+        })
+        // Jos muutetaan numeroa henkilöltä joka on poistettu
+        .catch(error => {
+          createNotificationMessage("there was no record of user", "maroon", personNameToUpdate)
+          setPersons(persons.filter(person => person.id !== personToUpdateId))
         })
       } else {
         console.log('User did not want to update the number')

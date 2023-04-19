@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Teemu Mäkelä",
-      "number": "050-2345678",
-      "id": 12
-    },
-    {
       "name": "Laura Nieminen",
       "number": "040-3456789",
       "id": 13
@@ -42,7 +37,7 @@
     },
     {
       "name": "Aarne Tenkanen",
-      "number": "44",
+      "number": "Add new number",
       "id": 21
     }
   ]
