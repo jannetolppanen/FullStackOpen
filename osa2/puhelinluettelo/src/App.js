@@ -70,8 +70,10 @@ const RemoveButton = ({ id, removePerson }) => {
 const App = () => {
   // Tallennetaan tänne persons json
   const [persons, setPersons] = useState([])
-  const [ActionMessageText, setActionMessageText] = useState(null)
-  const [messageCssType, setMessageCssType] = useState(null)
+  const [TextAndCss, setTextAndCss] = useState({
+    text : "",
+    css: ""
+  })
 
   // Haetaan nimilista ensimmmäisen kerran
   useEffect(() => {
@@ -137,12 +139,16 @@ const App = () => {
         .delete(`http://localhost:3001/persons/${id}`)
         .then(response => {
           setPersons(persons.filter(person => person.id !== id))
-          setMessageCssType('deletion')
-          setActionMessageText(
-            `Deleted ${removedPersonsName}`
-          )
+          setTextAndCss({
+            text: `deleted ${removedPersonsName}`,
+            css: 'red'
+
+          })
           setTimeout(() => {
-            setActionMessageText(null)
+            setTextAndCss({
+              text: "", 
+              css: ""
+            })
           }, 2500)
         })
     }
@@ -163,7 +169,7 @@ const App = () => {
 
   return (
     <div>
-      <ActionMessage message={ActionMessageText} type={messageCssType} />
+      <ActionMessage message={TextAndCss} />
       <h2>Phonebook</h2>
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
       <h1>add a new</h1>

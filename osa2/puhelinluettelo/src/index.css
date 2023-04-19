@@ -1,25 +1,4 @@
-.deletion {
-  color: red;
-  background: lightgrey;
-  font-size: 20px;
-  border-style: solid;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.addition {
-  color: green;
-  background: lightgrey;
-  font-size: 20px;
-  border-style: solid;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.edit {
-  color: orange;
+.actionmessage {
   background: lightgrey;
   font-size: 20px;
   border-style: solid;
