@@ -95,6 +95,20 @@ const App = () => {
     return person ? person.name : ""
   }
 
+  const createNotificationMessage = (text, color, name) => {
+    setTextAndCss({
+      text: `${text} ${name}`,
+      css: color
+
+    })
+    setTimeout(() => {
+      setTextAndCss({
+        text: "", 
+        css: ""
+      })
+    }, 2500)
+  }
+
   //Luo uuden objektin joka lisätään personsiin
   const AddPerson = (event) => {
     event.preventDefault()
@@ -115,6 +129,9 @@ const App = () => {
         axios.put(`http://localhost:3001/persons/${personToUpdateId}`, updatedPerson)
         .then(response => {
           setPersons(persons.map(person => person.id !== personToUpdateId ? person : response.data))
+          setNewName("")
+          setNewNumber("")
+          createNotificationMessage("changed the number of", "purple", updatedPerson.name)
         })
       } else {
         console.log('User did not want to update the number')
@@ -127,29 +144,22 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          createNotificationMessage("Added", "green", returnedPerson.name)
+
         })
     }
   }
   // Lähetetään deletepyyntö id:n kanssa ja päivitetään persons listalla joka ei sisällä kyseistä id:tä
   const removePerson = (id) => {
     const removedPersonsName = getNameById(id)
+
     let confirm = window.confirm('Are you sure you want to delete this item?')
     if (confirm) {
       axios
         .delete(`http://localhost:3001/persons/${id}`)
         .then(response => {
           setPersons(persons.filter(person => person.id !== id))
-          setTextAndCss({
-            text: `deleted ${removedPersonsName}`,
-            css: 'red'
-
-          })
-          setTimeout(() => {
-            setTextAndCss({
-              text: "", 
-              css: ""
-            })
-          }, 2500)
+          createNotificationMessage("Deleted", "red", removedPersonsName)
         })
     }
   }
