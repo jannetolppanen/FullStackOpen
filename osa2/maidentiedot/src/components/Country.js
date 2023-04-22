@@ -1,3 +1,5 @@
+// Currently shows all countries
+
 const Country = ({ countryList }) => {
 
     const languageList = (list) => {

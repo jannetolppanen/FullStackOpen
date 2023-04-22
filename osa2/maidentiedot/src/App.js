@@ -1,11 +1,14 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Country from './components/Country'
+import Searchbar from './components/Searchbar'
+import ListOfCountries from './components/ListOfCountries'
 
 const App = () => {
   const url = 'https://restcountries.com/v3.1/all'
   const [countryList, setCountryList] = useState([])
   
+  // Pull restcountries.com to countryList
   const hook = () => {
     axios.get(url)
     .then( res => {
@@ -15,15 +18,15 @@ const App = () => {
       console.log(error)
     })
   }
-
   useEffect(hook, [])
 
-  // const items = countryList.map(item => console.log(item))
 
 
   return (
     <div>
-      <Country countryList={countryList} />
+      <Searchbar />
+      <ListOfCountries countryList={countryList} />
+      {/* <Country countryList={countryList} /> */}
     </div>
   )
 
