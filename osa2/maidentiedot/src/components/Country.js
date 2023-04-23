@@ -11,17 +11,17 @@ const Country = ({ countryList }) => {
             Object.values(list)
         )
     }
-
     return (
         <>
-            {countryList.map(country =>
+            {countryList.map(country => 
                 <div key={country.name.common}>
                     <h2>
                         {country.name.common}
                     </h2>
                     <p>
                         capital {country.capital} <br />
-                        area {country.area}
+                        lat {country.capitalInfo.latlng[0]} <br />
+                        long {country.capitalInfo.latlng[1]}
                     </p>
                     <h3>
                         languages:
