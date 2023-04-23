@@ -20,8 +20,7 @@ const Country = ({ countryList }) => {
                     </h2>
                     <p>
                         capital {country.capital} <br />
-                        lat {country.capitalInfo.latlng[0]} <br />
-                        long {country.capitalInfo.latlng[1]}
+                        area {country.area}
                     </p>
                     <h3>
                         languages:
