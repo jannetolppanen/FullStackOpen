@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import Country from './components/Country'
+// import Country from './components/Country'
 import Searchbar from './components/Searchbar'
 import ListOfCountries from './components/ListOfCountries'
 
 const App = () => {
   const url = 'https://restcountries.com/v3.1/all'
   const [countryList, setCountryList] = useState([])
+  const [filter, setFilter] = useState("")
   
   // Pull restcountries.com to countryList
   const hook = () => {
@@ -20,13 +21,17 @@ const App = () => {
   }
   useEffect(hook, [])
 
+  const handleSearchChange = (event) => {
+    setFilter(event.target.value)
+    console.log(`filter: ${filter}`)
+  }
+
 
 
   return (
     <div>
-      <Searchbar />
-      <ListOfCountries countryList={countryList} />
-      {/* <Country countryList={countryList} /> */}
+      <Searchbar handleSearchChange={handleSearchChange} />
+      <ListOfCountries countryList={countryList} filter={filter} />
     </div>
   )
 

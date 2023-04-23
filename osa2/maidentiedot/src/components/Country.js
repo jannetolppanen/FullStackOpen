@@ -1,7 +1,8 @@
-// Currently shows all countries
+// Module was made to .map through a list of many countries but after changes it only takes in one country. Kept functionality the same in case we need it to .map over a bigger list later.
 
 const Country = ({ countryList }) => {
 
+    // returns an empty list of country has no languages listed and prevents react from breaking
     const languageList = (list) => {
         if (list === null || list === undefined) {
             return []

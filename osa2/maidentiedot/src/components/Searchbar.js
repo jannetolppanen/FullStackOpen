@@ -1,10 +1,10 @@
-const Searchbar = () => {
+const Searchbar = ({ handleSearchChange }) => {
     return (
         <div>
-        <form>
-        find countries <input />
-            <button type="submit">Submit</button>
-        </form>
+            <form>
+                find countries <input onChange={handleSearchChange} />
+                <button type="submit">Submit</button>
+            </form>
         </div>
     )
 }
