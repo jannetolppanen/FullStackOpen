@@ -1,6 +1,5 @@
 import Country from "./Country"
-import Forecast from "./Forecast"
-const ListOfCountries = ({ countryList, filter, setFilter, setCapital }) => {
+const ListOfCountries = ({ countryList, filter, setFilter, forecast, setForecast }) => {
 
     // when button is clicked, sets the new filter with the selected country
     const handleButtonClick = (country) => {
@@ -24,11 +23,9 @@ const ListOfCountries = ({ countryList, filter, setFilter, setCapital }) => {
 
     // when only 1 hit, we return a single country with more data
     if (filteredCountries.length === 1) {
-        const capital = filteredCountries[0].capital[0]
-        setCapital(capital)
         return (
             <div>
-                <Country countryList={filteredCountries} />
+                <Country countryList={filteredCountries} forecast={forecast} setForecast={setForecast} />
             </div>
         )
     }
