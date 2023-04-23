@@ -4,7 +4,8 @@ import { useEffect } from "react"
 
 const Country = ({ countryList, forecast, setForecast }) => {
     const capital = countryList[0].capital[0]
-    const forecastUrl = `http://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=e6c49ed134026b6f31a19e6e1be5f855`
+    const api_key = process.env.REACT_APP_API_KEY
+    const forecastUrl = `http://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${api_key}`
 
     const hook = () => {
         axios.get(forecastUrl)
