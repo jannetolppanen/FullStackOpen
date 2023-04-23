@@ -1,5 +1,10 @@
 import Country from "./Country"
-const ListOfCountries = ({ countryList, filter }) => {
+const ListOfCountries = ({ countryList, filter, setFilter }) => {
+
+    // when button is clicked, sets the new filter with the selected country
+    const handleButtonClick = (country) => {
+        setFilter(country)
+    }
 
     // filter the list with the current search
     let filteredCountries = countryList
@@ -30,7 +35,7 @@ const ListOfCountries = ({ countryList, filter }) => {
         <div>
             <p>
                 {filteredCountries.map(country => {
-                    return <span key={country.name.common}>{country.name.common}<br /></span>
+                    return <span key={country.name.common}>{country.name.common} <button onClick={() => handleButtonClick(country.name.common)}>show</button><br /></span>
                 })}
             </p>
         </div>

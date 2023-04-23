@@ -23,7 +23,6 @@ const App = () => {
 
   const handleSearchChange = (event) => {
     setFilter(event.target.value)
-    console.log(`filter: ${filter}`)
   }
 
 
@@ -31,7 +30,7 @@ const App = () => {
   return (
     <div>
       <Searchbar handleSearchChange={handleSearchChange} />
-      <ListOfCountries countryList={countryList} filter={filter} />
+      <ListOfCountries countryList={countryList} filter={filter} setFilter={setFilter} />
     </div>
   )
 
