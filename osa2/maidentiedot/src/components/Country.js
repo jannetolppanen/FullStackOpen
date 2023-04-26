@@ -4,6 +4,7 @@ import { useEffect } from "react"
 
 const Country = ({ countryList, forecast, setForecast }) => {
     const capital = countryList[0].capital[0]
+    // api_key comes from .env file
     const api_key = process.env.REACT_APP_API_KEY
     const forecastUrl = `http://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${api_key}`
 
@@ -27,8 +28,6 @@ const Country = ({ countryList, forecast, setForecast }) => {
             Object.values(list)
         )
     }
-
-
 
     if (forecast) {
         return (
