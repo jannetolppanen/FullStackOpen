@@ -8,7 +8,7 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://janne:${password}@cluster0.qrchvix.mongodb.net/NoteApp?retryWrites=true&w=majority`
+  `mongodb+srv://janne:${password}@cluster0.qrchvix.mongodb.net/noteApp?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
@@ -21,7 +21,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
-  content: 'console logging result',
+  content: 'If you see this its from the Atlas DB',
   important: true,
 })
 
