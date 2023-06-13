@@ -4,8 +4,9 @@ const NoteForm = ( {addNote, newNote, handleNoteChange }) => (
     <input
       value={newNote}
       onChange={handleNoteChange}
+      id='input'
     />
-    <button type="submit">save</button>
+    <button id='save-button'type="submit">save</button>
   </form>
 )
 
